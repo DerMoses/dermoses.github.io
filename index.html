@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!-- Dokumenttyp-Deklaration - sagt dem Browser, dass dies ein HTML5-Dokument ist
   ========================================================
   HAUPTPROJEKT: LINGUISTIK-LERNPLATTFORM MIT FULLPAGE.JS
   ========================================================
@@ -9,300 +9,160 @@
   3. Responsives Design für alle Geräte
   4. Didaktische Inhaltsstrukturierung
 -->
-
 <html lang="de">
-<!-- 
-  SPRACHATTRIBUT:
-  - Wichtig für Screenreader und Suchmaschinen
-  - Bei englischem Content "lang=en" verwenden
--->
-
+<!-- Beginn des HTML-Dokuments mit Sprachattribut Deutsch -->
 <head>
-    <!-- 
-    METADATEN:
-    - charset: Zeichencodierung (UTF-8 für Umlaute)
-    - viewport: Mobile Skalierungseinstellungen
-    - title: Wird in Browser-Tabs und Bookmarks angezeigt
-    -->
+    <!-- Kopfbereich der Webseite - enthält Metadaten und Ressourcen -->
     <meta charset="UTF-8">
+    <!-- Zeichenkodierung (UTF-8 unterstützt Umlaute und Sonderzeichen) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Einstellung für responsive Darstellung auf verschiedenen Geräten -->
     <title>Linguistik-Lernplattform</title>
-
-    <!-- 
-    FULLPAGE.JS EINBINDEN:
-    - CDN-Link für die CSS-Datei der Bibliothek
-    - Ermöglicht die Abschnitts-Scroll-Effekte
-    -->
+    <!-- Titel der Webseite (erscheint im Browser-Tab) -->
+    
+    <!-- Einbindung der Fullpage.js CSS-Datei von einem CDN (Content Delivery Network) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.css">
-
+    
     <style>
-        /* 
-        GLOBALES STYLING:
-        - Basisformatierung für alle Elemente
-        - 'box-sizing: border-box' sorgt für konsistente Größenberechnung
-        */
+        /* CSS-Stile für die Webseite */
+        
         * {
-            box-sizing: border-box;
+            /* Universalselektor - gilt für alle Elemente */
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            /* Box-Modell-Einstellung (Padding wird in die Breite/Höhe einberechnet) */
         }
-
+        
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            /* Stile für den Hauptteil der Webseite */
+            font-family: Arial, sans-serif;
+            /* Schriftart */
         }
-
-        /* 
-        ABSCHNITTSGESTALTUNG:
-        - Jede .section entspricht einem thematischen Block
-        - vh/vw Einheiten = Prozentuale Bildschirmgröße
-        - Flexbox für zentrierte Ausrichtung
-        */
-        .section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 5vh 10vw;
-            text-align: center;
-            position: relative;
-        }
-
-        /* 
-        THEMENFARBEN:
-        - Farbpsychologisch abgestimmte Palette
-        - Jedes Thema hat konsistente Farbzuordnung
-        - HSL-Farbmodell für bessere Anpassbarkeit
-        */
-        #thema1 { background: hsl(168, 76%, 42%); } /* Phonetik */
-        #thema2 { background: hsl(204, 70%, 53%); } /* Semantik */
-        #thema3 { background: hsl(283, 39%, 53%); } /* Soziolinguistik */
-        #thema4 { background: hsl(6, 78%, 57%); }  /* Psycholinguistik */
-        #thema5 { background: hsl(37, 89%, 51%); } /* Historisch */
-        #thema6 { background: hsl(210, 29%, 24%); } /* Korpus */
-        #thema7 { background: hsl(145, 63%, 42%); } /* Angewandt */
-
-        /* 
-        NAVIGATIONSLEISTE:
-        - Position: fixed = bleibt beim Scrollen sichtbar
-        - z-index: 100 = über anderen Elementen
-        - backdrop-filter: moderner Glas-Effekt
-        */
+        
+        /* Navigations-Buttons */
         .nav-buttons {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            display: flex;
-            gap: 12px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: fixed; /* Fixierte Position (scrollt nicht mit) */
+            top: 20px; /* 20px vom oberen Rand */
+            left: 50%; /* Mitte des Bildschirms */
+            transform: translateX(-50%); /* Zentrierung */
+            z-index: 100; /* Stapelreihenfolge (über anderen Elementen) */
+            display: flex; /* Flexbox-Layout */
+            gap: 10px; /* Abstand zwischen den Buttons */
+            background: rgba(255,255,255,0.2); /* Weißer Hintergrund mit 20% Deckkraft */
+            backdrop-filter: blur(10px); /* Unschärfeeffekt für "glasigen" Look */
+            padding: 10px 20px; /* Innenabstand */
+            border-radius: 50px; /* Abgerundete Ecken (kreisähnlich) */
         }
-
-        /* 
-        NAVIGATIONSBUTTONS:
-        - rem-Einheit für skalierbare Größen
-        - transition: animierte Hover-Effekte
-        - cursor: pointer zeigt Klickbarkeit an
-        */
+        
         .nav-btn {
-            background: rgba(255,255,255,0.3);
-            border: none;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
+            /* Stile für die Navigationsbuttons */
+            background: rgba(255,255,255,0.3); /* Weißer Hintergrund mit 30% Deckkraft */
+            border: none; /* Kein Rahmen */
+            color: white; /* Weiße Schrift */
+            padding: 8px 16px; /* Innenabstand */
+            border-radius: 20px; /* Abgerundete Ecken */
+            cursor: pointer; /* Mauszeiger wird zur Hand (wie bei Links) */
         }
-
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
+        
+        /* Farbige Abschnitte - jeder Abschnitt bekommt eine andere Hintergrundfarbe */
+        #thema1 { background: #2ecc71; } /* Grün - Phonetik */
+        #thema2 { background: #3498db; } /* Blau - Semantik */
+        #thema3 { background: #9b59b6; } /* Lila - Soziolinguistik */
+        #thema4 { background: #e74c3c; } /* Rot - Psycholinguistik */
+        #thema5 { background: #f39c12; } /* Orange - Historische Linguistik */
+        #thema6 { background: #1abc9c; } /* Türkis - Korpuslinguistik */
+        #thema7 { background: #34495e; } /* Dunkelblau - Angewandte Linguistik */
+        
+        /* Abschnitts-Inhalt */
+        .section {
+            text-align: center; /* Zentrierter Text */
+            display: flex; /* Flexbox-Layout */
+            flex-direction: column; /* Elemente untereinander */
+            justify-content: center; /* Vertikale Zentrierung */
+            align-items: center; /* Horizontale Zentrierung */
+            color: white; /* Weiße Schrift */
         }
-
-        /* 
-        INHALTSKONTÄNER:
-        - max-width: Lesefreundliche Zeilenlänge
-        - overflow: Automatische Scrollbalken bei Bedarf
-        */
-        .content-box {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(5px);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            max-width: 800px;
-            width: 90%;
-            text-align: left;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-
-        /* 
-        RESPONSIVE ANPASSUNGEN:
-        - Media Queries für verschiedene Bildschirmgrößen
-        - Stacked Navigation auf kleinen Geräten
-        */
-        @media (max-width: 768px) {
-            .nav-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
-                top: 10px;
-                gap: 8px;
-                max-width: 95vw;
-            }
-            
-            .nav-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
-            .content-box {
-                padding: 1.5rem;
-            }
+        
+        h1 {
+            font-size: 2.5rem; /* Schriftgröße (relativ zur Basisgröße) */
+            margin-bottom: 20px; /* Abstand nach unten */
         }
     </style>
 </head>
-
 <body>
-    <!-- 
-    HAUPTNAVIGATION:
-    - data-target Attribute verlinken zu Abschnitts-IDs
-    - Wird via JavaScript angesteuert
-    -->
-    <nav class="nav-buttons" id="mainNav">
+    <!-- NAVIGATION -->
+    <div class="nav-buttons">
+        <!-- Navigationsleiste mit Buttons für die verschiedenen linguistischen Themen -->
         <button class="nav-btn" data-target="thema1">Phonetik</button>
+        <!-- data-target Attribut wird für JavaScript verwendet -->
         <button class="nav-btn" data-target="thema2">Semantik</button>
         <button class="nav-btn" data-target="thema3">Soziolinguistik</button>
         <button class="nav-btn" data-target="thema4">Psycholinguistik</button>
         <button class="nav-btn" data-target="thema5">Historisch</button>
         <button class="nav-btn" data-target="thema6">Korpus</button>
         <button class="nav-btn" data-target="thema7">Angewandt</button>
-    </nav>
-
-    <!-- 
-    FULLPAGE CONTAINER:
-    - #fullpage = Root-Element für die Bibliothek
-    - Jede section = Ein thematischer Block
-    - IDs entsprechen den Anchor-Links
-    -->
-    <div id="fullpage">
-        <!-- THEMA 1 -->
-        <section class="section" id="thema1">
-            <h1>Phonetik & Phonologie</h1>
-            <article class="content-box">
-                <h2>Lautsysteme analysieren</h2>
-                <p>Phonetik beschreibt die physikalische Lautproduktion, während Phonologie die funktionale Verwendung von Lauten in Sprachsystemen untersucht.</p>
-                
-                <!-- 
-                INTERNE NAVIGATION:
-                - data-target verweist auf nächsten Abschnitt
-                - Wird per JavaScript angesteuert
-                -->
-                <div class="nav-buttons">
-                    <button class="nav-btn" data-target="thema2">Weiter zu Semantik →</button>
-                </div>
-            </article>
-        </section>
-        
-        <!-- THEMA 2 -->
-        <section class="section" id="thema2">
-            <h1>Semantik & Pragmatik</h1>
-            <article class="content-box">
-                <h2>Bedeutungsebenen</h2>
-                <p>Unterscheidung zwischen wortwörtlicher Bedeutung (Semantik) und kontextabhängiger Interpretation (Pragmatik).</p>
-                
-                <div class="nav-buttons">
-                    <button class="nav-btn" data-target="thema1">← Zurück</button>
-                    <button class="nav-btn" data-target="thema3">Weiter →</button>
-                </div>
-            </article>
-        </section>
-        
-        <!-- Weitere Themen (3-7) folgen demselben Muster -->
     </div>
 
-    <!-- 
-    JAVASCRIPT-IMPLEMENTIERUNG:
-    - Wird am Ende geladen für bessere Performance
-    - Zwei Hauptfunktionen:
-      1. Fullpage.js Initialisierung
-      2. Custom Navigation Logic
-    -->
+    <!-- FULLPAGE ABSCHNITTE -->
+    <div id="fullpage">
+        <!-- Jede section entspricht einem Bildschirmbereich (dank Fullpage.js) -->
+        <section class="section" id="thema1">
+            <h1>Phonetik & Phonologie</h1>
+            <p>Studie der Sprachlaute und ihrer systematischen Verwendung.</p>
+        </section>
+        <section class="section" id="thema2">
+            <h1>Semantik & Pragmatik</h1>
+            <p>Wie Bedeutung in Sprache entsteht und interpretiert wird.</p>
+        </section>
+        <section class="section" id="thema3">
+            <h1>Soziolinguistik</h1>
+            <p>Sprache im sozialen Kontext.</p>
+        </section>
+        <section class="section" id="thema4">
+            <h1>Psycholinguistik</h1>
+            <p>Wie das Gehirn Sprache verarbeitet.</p>
+        </section>
+        <section class="section" id="thema5">
+            <h1>Historische Linguistik</h1>
+            <p>Sprachwandel über die Zeit.</p>
+        </section>
+        <section class="section" id="thema6">
+            <h1>Korpuslinguistik</h1>
+            <p>Analyse großer Textsammlungen.</p>
+        </section>
+        <section class="section" id="thema7">
+            <h1>Angewandte Linguistik</h1>
+            <p>Praktische Anwendungen linguistischer Forschung.</p>
+        </section>
+    </div>
+
+    <!-- Fullpage.js JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.js"></script>
+    <!-- Einbindung der Fullpage.js Bibliothek -->
+    
     <script>
-        /**
-         * FULLPAGE.JS KONFIGURATION
-         * - autoScrolling: Automatische Abschnitts-Snapping
-         * - navigation: Punkte-Navigation rechts
-         * - anchors: URL-hash für direkte Verlinkung
-         */
-        const fp = new fullpage('#fullpage', {
-            autoScrolling: true,
-            scrollHorizontally: false,
-            navigation: true,
-            navigationPosition: 'right',
+        // JavaScript-Code für die Interaktivität der Seite
+        
+        // Fullpage.js Initialisierung
+        // Erstellt eine neue Fullpage-Instanz mit Konfiguration
+        new fullpage('#fullpage', {
+            autoScrolling: true, // Automatisches Scrollen aktivieren
+            navigation: true, // Navigationspunkte anzeigen
+            navigationPosition: 'right', // Position der Navigationspunkte
             anchors: ['thema1', 'thema2', 'thema3', 'thema4', 'thema5', 'thema6', 'thema7'],
-            
-            /**
-             * CALLBACK: Nach Abschnittswechsel
-             * @param {Object} origin - Vorheriger Abschnitt
-             * @param {Object} destination - Neuer Abschnitt
-             */
-            afterLoad: function(origin, destination) {
-                console.log('Aktiver Abschnitt:', destination.anchor);
-                // Hier könnten weitere Aktionen bei Abschnittswechsel stehen
-            }
+            // Ankerpunkte für die einzelnen Abschnitte
         });
 
-        /**
-         * NAVIGATIONSLISTENER
-         * - Delegiertes Event-Handling für alle Buttons
-         * - Verwendet data-target Attribute zur Navigation
-         */
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('nav-btn')) {
-                const targetSection = e.target.getAttribute('data-target');
-                
-                // Fullpage.js API Aufruf
-                fullpage_api.moveTo(targetSection);
-                
-                /**
-                 * WORKAROUND: Safari Smooth-Scroll Bug
-                 * - Erzwingt einen minimalen Scroll für korrekte Darstellung
-                 */
-                setTimeout(() => {
-                    window.scrollBy(0, 1);
-                }, 50);
-            }
-        });
-
-        /**
-         * INHALTSÜBERFLUSS-PRÜFUNG
-         * - Automatische Scrollbalken bei langen Inhalten
-         * - Wird bei Laden und Resize ausgeführt
-         */
-        function checkContentOverflow() {
-            document.querySelectorAll('.content-box').forEach(box => {
-                const section = box.closest('.section');
-                if (box.scrollHeight > section.clientHeight * 0.7) {
-                    box.style.maxHeight = '60vh';
-                    box.style.overflowY = 'auto';
-                    box.style.paddingRight = '8px'; // Platz für Scrollbar
-                }
+        // Navi-Buttons Funktion
+        // Wählt alle Navigationsbuttons aus und fügt jedem einen Event-Listener hinzu
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Bei Klick auf einen Button:
+                const target = btn.getAttribute('data-target'); // Holt das Ziel aus data-target
+                fullpage_api.moveTo(target); // Bewegt die Fullpage zum entsprechenden Abschnitt
             });
-        }
-
-        // Event Listener
-        window.addEventListener('load', checkContentOverflow);
-        window.addEventListener('resize', checkContentOverflow);
+        });
     </script>
 </body>
 </html>
