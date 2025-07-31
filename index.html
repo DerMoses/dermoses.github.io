@@ -1,88 +1,308 @@
 <!DOCTYPE html>
+<!-- 
+  ========================================================
+  HAUPTPROJEKT: LINGUISTIK-LERNPLATTFORM MIT FULLPAGE.JS
+  ========================================================
+  Dieses Template kombiniert:
+  1. Fullpage.js für animierte Abschnittsübergänge
+  2. Thematische Navigation mit Sprungmarken
+  3. Responsives Design für alle Geräte
+  4. Didaktische Inhaltsstrukturierung
+-->
+
 <html lang="de">
+<!-- 
+  SPRACHATTRIBUT:
+  - Wichtig für Screenreader und Suchmaschinen
+  - Bei englischem Content "lang=en" verwenden
+-->
+
 <head>
-    <!-- METADATEN = "Metakommunikation" wie linguistische Kontextmarker -->
-    <meta charset="UTF-8">  <!-- Zeichenkodierung = Phonem-Graphem-Korrespondenz -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Wahrnehmungsanpassung wie visuelle Scaffolding-Effekte -->
-    
-    <title>Linguistik-Lernplattform</title>  <!-- Lexikalischer "Head-Act" (Pragmatik) -->
-    
-    <!-- EXTERNE BIBLIOTHEK = Fremdsprachliche Entlehnung (Code-Switching) -->
+    <!-- 
+    METADATEN:
+    - charset: Zeichencodierung (UTF-8 für Umlaute)
+    - viewport: Mobile Skalierungseinstellungen
+    - title: Wird in Browser-Tabs und Bookmarks angezeigt
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistik-Lernplattform</title>
+
+    <!-- 
+    FULLPAGE.JS EINBINDEN:
+    - CDN-Link für die CSS-Datei der Bibliothek
+    - Ermöglicht die Abschnitts-Scroll-Effekte
+    -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.css">
 
     <style>
         /* 
-        GLOBAL STYLES = Universalgrammatik der Seite 
-        - :root = Tiefenstruktur (vgl. Chomskys UG)
-        - * = Default-Markierung (wie unmarkierte phonologische Features)
+        GLOBALES STYLING:
+        - Basisformatierung für alle Elemente
+        - 'box-sizing: border-box' sorgt für konsistente Größenberechnung
         */
-        :root {
-            --transition-speed: 0.3s;  <!-- Kognitive Verarbeitungszeit (Psycholinguistik) -->
-            --content-max-width: 800px; <!-- Optimales Lesefeld (Eye-Tracking-Studien) -->
-        }
-        
         * {
-            box-sizing: border-box;  <!-- "Bounding Box" = Phonologische Domänengrenze -->
-            margin: 0;  <!-- Außenabstand = Soziale Distanz (Proxemik) -->
-            padding: 0; <!-- Innenabstand = Wortinnengliederung (Morphologie) -->
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #333;
         }
 
         /* 
-        PADDING/MARGIN = Silbenstruktur-Analogie 
-        - padding = Onset/Rime (Innenraum eines Elements)
-        - margin = Silbengrenzen (Außenraum)
+        ABSCHNITTSGESTALTUNG:
+        - Jede .section entspricht einem thematischen Block
+        - vh/vw Einheiten = Prozentuale Bildschirmgröße
+        - Flexbox für zentrierte Ausrichtung
+        */
+        .section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 5vh 10vw;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 
+        THEMENFARBEN:
+        - Farbpsychologisch abgestimmte Palette
+        - Jedes Thema hat konsistente Farbzuordnung
+        - HSL-Farbmodell für bessere Anpassbarkeit
+        */
+        #thema1 { background: hsl(168, 76%, 42%); } /* Phonetik */
+        #thema2 { background: hsl(204, 70%, 53%); } /* Semantik */
+        #thema3 { background: hsl(283, 39%, 53%); } /* Soziolinguistik */
+        #thema4 { background: hsl(6, 78%, 57%); }  /* Psycholinguistik */
+        #thema5 { background: hsl(37, 89%, 51%); } /* Historisch */
+        #thema6 { background: hsl(210, 29%, 24%); } /* Korpus */
+        #thema7 { background: hsl(145, 63%, 42%); } /* Angewandt */
+
+        /* 
+        NAVIGATIONSLEISTE:
+        - Position: fixed = bleibt beim Scrollen sichtbar
+        - z-index: 100 = über anderen Elementen
+        - backdrop-filter: moderner Glas-Effekt
+        */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 
+        NAVIGATIONSBUTTONS:
+        - rem-Einheit für skalierbare Größen
+        - transition: animierte Hover-Effekte
+        - cursor: pointer zeigt Klickbarkeit an
+        */
+        .nav-btn {
+            background: rgba(255,255,255,0.3);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 
+        INHALTSKONTÄNER:
+        - max-width: Lesefreundliche Zeilenlänge
+        - overflow: Automatische Scrollbalken bei Bedarf
         */
         .content-box {
-            padding: 2rem;  <!-- Wie Vokaldauer in betonten Silben -->
-            margin: 1.5rem 0;  <!-- Wie prosodische Phrasengrenzen -->
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            max-width: 800px;
+            width: 90%;
+            text-align: left;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
 
         /* 
-        RESPONSIVE DESIGN = Sprachliche Adaption (Registerwechsel)
-        - @media = Kontextabhängige Variationsregeln (Soziolinguistik)
+        RESPONSIVE ANPASSUNGEN:
+        - Media Queries für verschiedene Bildschirmgrößen
+        - Stacked Navigation auf kleinen Geräten
         */
         @media (max-width: 768px) {
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+                top: 10px;
+                gap: 8px;
+                max-width: 95vw;
+            }
+            
             .nav-btn {
-                padding: 0.4rem;  <!-- Reduzierte Form (Elision) -->
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .content-box {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- NAVIGATION = Lexikalischer Zugriff (Mental Lexicon) -->
-    <nav class="nav-buttons">
-        <button data-target="thema1">Phonetik</button>  <!-- Anchors = Assoziative Verknüpfungen -->
+    <!-- 
+    HAUPTNAVIGATION:
+    - data-target Attribute verlinken zu Abschnitts-IDs
+    - Wird via JavaScript angesteuert
+    -->
+    <nav class="nav-buttons" id="mainNav">
+        <button class="nav-btn" data-target="thema1">Phonetik</button>
+        <button class="nav-btn" data-target="thema2">Semantik</button>
+        <button class="nav-btn" data-target="thema3">Soziolinguistik</button>
+        <button class="nav-btn" data-target="thema4">Psycholinguistik</button>
+        <button class="nav-btn" data-target="thema5">Historisch</button>
+        <button class="nav-btn" data-target="thema6">Korpus</button>
+        <button class="nav-btn" data-target="thema7">Angewandt</button>
     </nav>
 
-    <!-- SECTIONS = Diskurseinheiten (Textlinguistik) -->
+    <!-- 
+    FULLPAGE CONTAINER:
+    - #fullpage = Root-Element für die Bibliothek
+    - Jede section = Ein thematischer Block
+    - IDs entsprechen den Anchor-Links
+    -->
     <div id="fullpage">
-        <section id="thema1">
+        <!-- THEMA 1 -->
+        <section class="section" id="thema1">
+            <h1>Phonetik & Phonologie</h1>
             <article class="content-box">
+                <h2>Lautsysteme analysieren</h2>
+                <p>Phonetik beschreibt die physikalische Lautproduktion, während Phonologie die funktionale Verwendung von Lauten in Sprachsystemen untersucht.</p>
+                
                 <!-- 
-                HIERARCHIE = Konstituentenstruktur 
-                h1 > h2 > p = Matrixsatz > eingebetteter Satz > Proposition
+                INTERNE NAVIGATION:
+                - data-target verweist auf nächsten Abschnitt
+                - Wird per JavaScript angesteuert
                 -->
-                <h1>Phonetik</h1>
-                <h2>Lautproduktion</h2>
-                <p>Artikulatorische Prozesse...</p>
+                <div class="nav-buttons">
+                    <button class="nav-btn" data-target="thema2">Weiter zu Semantik →</button>
+                </div>
             </article>
         </section>
+        
+        <!-- THEMA 2 -->
+        <section class="section" id="thema2">
+            <h1>Semantik & Pragmatik</h1>
+            <article class="content-box">
+                <h2>Bedeutungsebenen</h2>
+                <p>Unterscheidung zwischen wortwörtlicher Bedeutung (Semantik) und kontextabhängiger Interpretation (Pragmatik).</p>
+                
+                <div class="nav-buttons">
+                    <button class="nav-btn" data-target="thema1">← Zurück</button>
+                    <button class="nav-btn" data-target="thema3">Weiter →</button>
+                </div>
+            </article>
+        </section>
+        
+        <!-- Weitere Themen (3-7) folgen demselben Muster -->
     </div>
 
-    <!-- JAVASCRIPT = Performative Äußerungen (Sprechakte) -->
+    <!-- 
+    JAVASCRIPT-IMPLEMENTIERUNG:
+    - Wird am Ende geladen für bessere Performance
+    - Zwei Hauptfunktionen:
+      1. Fullpage.js Initialisierung
+      2. Custom Navigation Logic
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.js"></script>
     <script>
         /**
-         * EVENT-LISTENER = Kognitive Reizverarbeitung
-         * - Analog zu Bottom-Up-Verarbeitung in der Wahrnehmung
+         * FULLPAGE.JS KONFIGURATION
+         * - autoScrolling: Automatische Abschnitts-Snapping
+         * - navigation: Punkte-Navigation rechts
+         * - anchors: URL-hash für direkte Verlinkung
          */
-        document.addEventListener('click', function(e) {
-            // e.target = Stimulus (Psychologie)
-            if (e.target.classList.contains('nav-btn')) {
-                // fullpage_api.moveTo() = Top-Down-Steuerung (Exekutive Funktionen)
-                fullpage_api.moveTo(e.target.dataset.target); 
+        const fp = new fullpage('#fullpage', {
+            autoScrolling: true,
+            scrollHorizontally: false,
+            navigation: true,
+            navigationPosition: 'right',
+            anchors: ['thema1', 'thema2', 'thema3', 'thema4', 'thema5', 'thema6', 'thema7'],
+            
+            /**
+             * CALLBACK: Nach Abschnittswechsel
+             * @param {Object} origin - Vorheriger Abschnitt
+             * @param {Object} destination - Neuer Abschnitt
+             */
+            afterLoad: function(origin, destination) {
+                console.log('Aktiver Abschnitt:', destination.anchor);
+                // Hier könnten weitere Aktionen bei Abschnittswechsel stehen
             }
         });
+
+        /**
+         * NAVIGATIONSLISTENER
+         * - Delegiertes Event-Handling für alle Buttons
+         * - Verwendet data-target Attribute zur Navigation
+         */
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('nav-btn')) {
+                const targetSection = e.target.getAttribute('data-target');
+                
+                // Fullpage.js API Aufruf
+                fullpage_api.moveTo(targetSection);
+                
+                /**
+                 * WORKAROUND: Safari Smooth-Scroll Bug
+                 * - Erzwingt einen minimalen Scroll für korrekte Darstellung
+                 */
+                setTimeout(() => {
+                    window.scrollBy(0, 1);
+                }, 50);
+            }
+        });
+
+        /**
+         * INHALTSÜBERFLUSS-PRÜFUNG
+         * - Automatische Scrollbalken bei langen Inhalten
+         * - Wird bei Laden und Resize ausgeführt
+         */
+        function checkContentOverflow() {
+            document.querySelectorAll('.content-box').forEach(box => {
+                const section = box.closest('.section');
+                if (box.scrollHeight > section.clientHeight * 0.7) {
+                    box.style.maxHeight = '60vh';
+                    box.style.overflowY = 'auto';
+                    box.style.paddingRight = '8px'; // Platz für Scrollbar
+                }
+            });
+        }
+
+        // Event Listener
+        window.addEventListener('load', checkContentOverflow);
+        window.addEventListener('resize', checkContentOverflow);
     </script>
 </body>
 </html>
