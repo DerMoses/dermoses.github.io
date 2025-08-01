@@ -156,11 +156,12 @@
 
         // Navi-Buttons Funktion
         // Wählt alle Navigationsbuttons aus und fügt jedem einen Event-Listener hinzu
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Bei Klick auf einen Button:
-                const target = btn.getAttribute('data-target'); // Holt das Ziel aus data-target
-                fullpage_api.moveTo(target); // Bewegt die Fullpage zum entsprechenden Abschnitt
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        // Entferne "thema" vom String und konvertiere zur Zahl, dann -1 für 0-basierten Index
+        const sectionIndex = parseInt(target.replace('thema', '')) - 1;
+        fullpage_api.moveTo(sectionIndex + 1); // +1 weil Sektionen 1-basiert sind
             });
         });
     </script>
